@@ -1,6 +1,5 @@
 server:
   port: 8088
-
 spring:
-  profile:
-    active: test
+  profiles:
+    active: dev

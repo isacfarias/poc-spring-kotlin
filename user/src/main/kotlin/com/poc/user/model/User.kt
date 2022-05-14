@@ -1,19 +1,19 @@
 package com.poc.user.model
 
-import lombok.Data
 import javax.persistence.*
 
-@Data
 @Entity
 @Table(name = "user")
-class User {
+class User() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var userId: Long = 0;
-    var username: String = "";
+    var userId: Long? = null;
+    var username: String? = null;
     @Column(unique = true)
-    var email: String = "";
+    var email: String? = null;
     @Column(nullable = false)
     var password: String = "";
+    constructor(username: String, email: String, password: String) : this()
+    constructor(userId: Long, username: String, email: String, password: String) : this()
 }
