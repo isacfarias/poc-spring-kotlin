@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort.Direction
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/user")
@@ -17,12 +18,14 @@ class UserResource(private val service: UserService) {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun all(@RequestParam(value = "page", defaultValue = "0") page: Int,
-            @RequestParam(value = "userId", defaultValue = "0") userId: Long,
-            @RequestParam(value = "username", defaultValue = "") username: String,
+            @RequestParam(value = "userId", required = false) userId: Optional<Long>,
+            @RequestParam(value = "username", required = false) username: Optional<String>,
             @RequestParam(value = "linesPerPage", defaultValue = "12") linesPerPage: Int,
             @RequestParam(value = "orderBy", defaultValue = "username") orderBy: String,
             @RequestParam(value = "direction", defaultValue = "DESC") direction: String): Page<UserDTO> {
-        return service.all(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy))
+        return service.all(userId,
+            username,
+            PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy))
     }
 
     @PostMapping
@@ -42,6 +45,5 @@ class UserResource(private val service: UserService) {
     fun delete(@PathVariable id: Long) {
         val userSaved = service.remove(id)
     }
-
 
 }
