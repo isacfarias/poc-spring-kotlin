@@ -7,13 +7,11 @@ import com.poc.user.model.User
 
 fun UserRequestDTO.toUserSave() = User(
     username = username,
-    email = email,
-    password = password
+    email = email
 )
 
 fun UserUpdateRequestDTO.toUserUpdate() = User(
     username = username,
-    email = email,
-    password = password
+    email = email
 )
 

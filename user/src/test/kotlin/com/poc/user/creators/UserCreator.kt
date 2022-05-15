@@ -7,19 +7,19 @@ import com.poc.user.model.User
 class UserCreator {
 
     fun createUserRequest(): UserRequestDTO {
-        return UserRequestDTO("Asdrubaldp", "asdrubaldo@mail.com", "@sd4b@d0");
+        return UserRequestDTO("Asdrubaldp", "asdrubaldo@mail.com");
     }
 
     fun createUserSave(): User {
-        return User(createUserRequest().username, createUserRequest().email, createUserRequest().password);
+        return User(createUserRequest().username, createUserRequest().email);
     }
 
     fun createUserSaved(): User {
-        return User(1, createUserRequest().username, createUserRequest().email, createUserRequest().password);
+        return User(1, createUserRequest().username, createUserRequest().email);
     }
 
    fun createUserDTO(): UserDTO {
-       return UserDTO(createUserSave().userId, createUserSave().username, createUserSave().password)
+       return UserDTO(createUserSave().userId, createUserSave().username, createUserRequest().email)
    }
 
 }
