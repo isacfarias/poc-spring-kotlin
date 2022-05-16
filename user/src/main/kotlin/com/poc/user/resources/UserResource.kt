@@ -43,7 +43,7 @@ class UserResource(private val service: UserService) {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) {
-        val userSaved = service.remove(id)
+        service.remove(id)
     }
 
 }

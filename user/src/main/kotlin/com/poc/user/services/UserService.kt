@@ -4,17 +4,14 @@ import com.poc.user.dto.UserDTO
 import com.poc.user.dto.UserRequestDTO
 import com.poc.user.dto.UserUpdateRequestDTO
 import com.poc.user.dto.extensions.toUserSave
-import com.poc.user.dto.extensions.toUserUpdate
 import com.poc.user.handler.Exceptions.DatabaseException
 import com.poc.user.repositories.UserRepository
 import com.poc.user.repositories.specification.UserSpecification
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.GetMapping
-import java.util.Optional
+import java.util.*
 
 @Service
 class UserService(private val repository: UserRepository) {
@@ -22,7 +19,7 @@ class UserService(private val repository: UserRepository) {
     fun all(userId: Optional<Long>,
             username: Optional<String>,
             pageRequest: PageRequest) : Page<UserDTO> {
-        return repository.findAll(UserSpecification(userId, username), pageRequest).map { u,  -> UserDTO(u.userId, u.username, u.email)};
+        return repository.findAll(UserSpecification(userId, username), pageRequest).map { u,  -> UserDTO(u.userId, u.username, u.email) };
     }
 
     fun save(userRequest: UserRequestDTO): UserDTO {

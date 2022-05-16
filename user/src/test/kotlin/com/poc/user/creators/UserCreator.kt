@@ -2,6 +2,7 @@ package com.poc.user.creators
 
 import com.poc.user.dto.UserDTO
 import com.poc.user.dto.UserRequestDTO
+import com.poc.user.dto.UserUpdateRequestDTO
 import com.poc.user.model.User
 
 class UserCreator {
@@ -19,7 +20,11 @@ class UserCreator {
     }
 
    fun createUserDTO(): UserDTO {
-       return UserDTO(createUserSave().userId, createUserSave().username, createUserRequest().email)
+       return UserDTO(createUserSaved().userId, createUserSaved().username, createUserSaved().email)
    }
+
+    fun createUserUpdateRequest(): UserUpdateRequestDTO {
+        return UserUpdateRequestDTO(createUserRequest().username, createUserRequest().email)
+    }
 
 }
